@@ -1,0 +1,60 @@
+﻿@model LloydSurvey.Classes.QuestionPageTwoModel
+@using LloydSurvey.Classes
+
+@{
+    ViewBag.Title = "Survey Questions - 2";
+}
+<div class="dft-overlay">
+    <form method="post" id="formTwo">
+        @Html.HiddenFor(m => Model.RedirectTo, new { @id = "hidredirect" })
+        <div>
+            <h2>Final Questions</h2>
+            <h3>@Model.Q2QuestionText</h3>
+            <div>@Html.HiddenFor(m => Model.Q2QuestionText)</div>
+            <div>
+                @Html.TextBoxFor(m => Model.Q2TextEntry1, new { @maxlength = 250 })
+                <div class="dft-val-msg">@Html.ValidationMessageFor(m => Model.Q2TextEntry1)</div>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => Model.Q2TextEntry2, new { @maxlength = 250 })
+                <div class="dft-val-msg">@Html.ValidationMessageFor(m => Model.Q2TextEntry2)</div>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => Model.Q2TextEntry3, new { @maxlength = 250 })
+                <div class="dft-val-msg">@Html.ValidationMessageFor(m => Model.Q3TextEntry1)</div>
+            </div>
+        </div>
+        <div>
+            <h3>@Model.Q3QuestionText</h3>
+            <div>@Html.HiddenFor(m => Model.Q3QuestionText)</div>
+            <div>
+                @Html.TextAreaFor(m => Model.Q3TextEntry1, new { @rows = 6, @maxlength = 5000 })
+                <div class="dft-val-msg">@Html.ValidationMessageFor(m => Model.Q3TextEntry1)</div>
+            </div>
+        </div>
+        <div>
+            <h3>@Model.Q4QuestionText</h3>
+            <div>@Html.HiddenFor(m => Model.Q4QuestionText)</div>
+            <div>
+                @Html.TextBoxFor(m => Model.Q4TextEntry1, new { @maxlength = 6, @class="dft-postal-code"})
+                <div class="dft-val-msg">@Html.ValidationMessageFor(m => Model.Q4TextEntry1)</div>
+            </div>
+        </div>
+        <div id="dft-pagetwo-nav">
+            <div id="dft-p2nav-prev" class="btn btn-primary btn-lg pull-left" onclick="navPrev();">&lt;&lt; Back</div>
+            <div id="dft-p2nav-next" class="btn btn-primary btn-lg pull-right" onclick="navNext();">Finish Survey</div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    function navPrev() {
+        $('#hidredirect').val("Map");
+        $('form#formTwo').submit();
+    }
+
+    function navNext() {
+        $('#hidredirect').val("Thankyou");
+        $('form#formTwo').submit();
+    }
+</script>

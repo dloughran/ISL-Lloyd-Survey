@@ -1,0 +1,91 @@
+﻿@model LloydSurvey.Classes.QuestionPageOneModel
+
+@{
+    ViewBag.Title = "One";
+}
+
+<div class="dft-overlay">
+    <h2>Question One</h2>
+    <h3>@Model.QuestionText</h3>
+    <form method="post" id="formq1" onsubmit="return checkItems()">
+        @Html.HiddenFor(m => Model.Id)
+        @Html.HiddenFor(m => Model.QuestionText)
+        @Html.HiddenFor(m => Model.MaxSelections)
+        @Html.HiddenFor(m => Model.MinSelections)
+
+        @for (int i = 0; i < Model.Items.Count; i++)
+        {
+            <div class="dft-p1-options">
+                @Html.HiddenFor(m => Model.Items[i].QuestionId)
+                @Html.HiddenFor(m => Model.Items[i].Id)
+                @Html.HiddenFor(m => Model.Items[i].Type)
+                @Html.HiddenFor(m => Model.Items[i].Label)
+                @Html.CheckBoxFor(m => Model.Items[i].Selected)
+                @Model.Items[i].Label
+            </div>
+        }
+        <div id="dftQ1Other">
+            <p class="dftQ1OtherLabel">Please specify...</p>
+            @Html.TextBoxFor(m => Model.OtherText, new { @maxlength = 100, @class = "dftOtherTextBox" })
+        </div>
+        <div id="pageOneValidationMessages" class="dft-val-msg"></div>
+        <input type="submit" value="Continue >>" class="btn btn-primary btn-lg dft-nav-btn" />
+    </form>
+</div>
+<script type="text/javascript">
+    
+    setOtherVisibility();
+    
+    $('#formq1').delegate('input[type=checkbox]', 'click', function (e) {
+        // Check for Maximum items selected
+        var maxSelections = @Model.MaxSelections;
+        var itemsSelected = document.querySelectorAll('input[type=checkbox]:checked').length
+        if(itemsSelected > maxSelections) {
+            $('#pageOneValidationMessages').html("You may select a maximum of " + maxSelections + " responses");
+            $(this).attr('checked',false);
+        } else {
+            $('#pageOneValidationMessages').html();
+        }
+        // And set visibility of "Other" text box and label
+        // set visibility of other text box based on "other" checkbox checked status
+        setOtherVisibility();
+
+    });
+    
+    function setOtherVisibility() {
+        var checkboxes = $('#formq1 input[type=checkbox]').toArray();
+        var otherCheckBoxIndex = checkboxes.length - 1;
+        var otherCheckBoxChecked = checkboxes[otherCheckBoxIndex].checked;
+        if(otherCheckBoxChecked) {
+            $('#dftQ1Other').show();
+        } else {
+            $('#dftQ1Other').hide();
+        }
+    }
+    
+    function checkItems(){
+        var selectedItemCount = $("#formq1 input[type=checkbox]:checked").length;
+        var minSelections = @Model.MinSelections;
+        var submit = true;
+        if(selectedItemCount < 3){
+            $('#pageOneValidationMessages').html("You must select at least " + minSelections + " responses.");
+            submit = false;
+        }
+        //check if "Other" is selected and Other text box is empty
+        var otherSelected = false;
+        var checkedItems = $('#formq1 input[type=checkbox]:checked').toArray();
+        var otherTextbox = $('#OtherText');
+        for(i = 0; i< checkedItems.length; i++) {
+            if(checkedItems[i].id === 'Items_17__Selected') {
+                otherSelected = true;
+                break;
+            }
+        }
+        if(otherSelected && otherTextbox.val().length <=0) {
+            $('#pageOneValidationMessages').html("You must provide your comments before continuing.");
+            submit = false;
+        }
+        return submit;
+    }
+</script>
+

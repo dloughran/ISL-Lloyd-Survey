@@ -1,0 +1,257 @@
+﻿html, body, #map-canvas {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color:#CCCCCC;
+    height:100%;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+ */
+
+/*CUSTOM BY DEVFACTO*/
+input, select, textarea {
+    max-width:100%;
+}
+
+h1, .dft-survey-title {
+    font-size:5em;
+    color:#339933;
+    text-transform:uppercase;
+    margin:0;
+}
+
+h2, .dft-survey-subtitle {
+    font-size:3em;
+    color:#333399;
+    text-transform:capitalize;
+    margin:0;
+}
+
+h3 { /*Using for Question Text*/
+     color:#339933;
+     font-weight:bold;
+     font-size:2em;
+     margin:0 0 5px 0;
+}
+
+.dft-copy-text {
+    font-size:2.5em;
+    margin:1.25em 0;
+}
+
+.dft-postal-code {
+    text-transform:uppercase;
+    width:100px !important; 
+}
+
+.dft-welcome-bg {
+    background:url(/Content/img/Lloyd1.jpg) no-repeat center center fixed;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+}
+
+.dft-overlay {
+    height:auto;
+    margin:2em 2em 0 2em;
+    padding:20px;
+    /*Fallback for browsers that don't support transparency in background via rgba*/
+    background-color:rgb(255,255,255);
+    background-color:rgba(255,255,255,.98);
+    /* For IE 9 - 11 */
+    opacity:0.98;
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FEFFFFFF, endColorstr=#FEFFFFFF);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FEFFFFFF, endColorstr=#FEFFFFFF)";
+    border-radius:20px 20px;
+}
+
+@media (min-width:768px) {
+        .btn-lg {
+        font-size:2.5em !important;
+    }
+}
+
+@media (max-width:767px) {
+    h1, .dft-survey-title {
+        font-size:1.9em;
+    }
+    
+    h2, .dft-survey-subtitle {
+        font-size:1.5em;
+    }
+
+    h3 {
+        font-size:1em;
+    }
+
+    .dft-copy-text {
+        font-size:1em;
+        margin:1em auto;
+    }
+    
+    .dft-overlay {
+        margin:10px 10px 0 10px;
+        padding:5px;
+    }
+
+
+}
+
+.dft-p1-options {
+    line-height:30px;
+    font-size:20px;
+}
+
+input[type="checkbox"] {
+    width:22px;
+    height:22px;
+    padding:5px;
+    vertical-align:middle;
+    margin:-2px 10px 0 0;
+}
+
+input[type="text"], textarea {
+    width:100%;
+    font-size:20px;
+    color:#2A2A2A;
+    background-color:#E0E6F7;
+    border:solid 1px #BBBBBB;
+    outline:none;
+    padding:5px;
+}
+
+textarea {
+    height:125px;
+}
+
+
+.dft-nav-btn {
+    margin:10px;
+}
+
+.dft-val-msg {
+    color:#FF0000;
+    font-weight:bold;
+    margin: 5px 0 0 10px;
+    min-height:30px;
+    height:30px;
+}
+
+#dftQ1Other {
+    display:none;
+}
+
+.dft-pin-40 {
+    width:50px;
+    height:36px;
+}
+
+[id^=pinDiv], #pinHelp{
+    background-color:#DDD;
+    width:75px;
+    height:75px;
+    padding:3px 0;
+    text-align:center;
+    border:solid 1px #EEE;
+    cursor:pointer;
+}
+
+#pinHelp {
+    height:75px;
+    padding-top:33px;
+    cursor:pointer;
+}
+
+#dftSurveyPreviousPage, #dftContinueSurvey {
+    box-shadow:0 2px 6px rgba(0,0,0,.3);
+    margin-bottom:20px;
+    cursor:pointer;
+}
+.dft-sel-pin {
+    background-color:#FFF;
+}
+
+#dftMapHelp {
+    position:fixed;
+    bottom:20px;
+    margin:0 5px 5px 5px;
+    padding:5px;
+    background-color:#FFF;
+    border:solid 1px #777;
+    font-family:sans-serif;
+    z-index:1;
+    cursor:pointer;
+}
+
+.dft-top-mar-60 {
+    margin-top:60px;
+}
+
+.dft-top-mar-150 {
+    margin-top:150px;
+}
+
+
+.dft-sav-mkr, .dft-del-mkr {
+    margin-top:5px;
+}
+
+.dft-mkr-info-win {
+    height:100%;
+    min-height:100%;
+}
+
+.dft-mkr-textarea {
+    border:none;
+    outline:none;
+    resize:none;
+    width:210px;
+    height:60px;
+    font-size:14px;
+    background-color:#FFFFFF;
+}
+
+#dft-pagetwo-nav {
+    overflow:hidden;
+}
+
+.dft-gm-lb-fix {
+    margin-bottom:0 !important;
+}
+
+.dft-gm-rb-fix {
+    margin-bottom:12px !important;
+}
+
+.gmnoprint img {
+    max-width:none;
+}
+
+@viewport{
+    height: device-height;
+    width:auto;
+    zoom:1.0;
+    max-zoom:1.0;
+}
+

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<questions>
+  <question>
+    <questionnumber>1</questionnumber>
+    <questiontext>Select your top three transportation issues for Lloydminster.</questiontext>
+    <questionitems>
+      <item>Congestion</item>
+      <item>Access to schools</item>
+      <item>Access to areas of employment</item>
+      <item>Access to key community destinations (e.g., community centres, arenas, libraries, etc.)</item>
+      <item>Access to commercial areas (e.g., downtown areas, power centres)</item>
+      <item>Access to areas of natural and cultural significance</item>
+      <item>Provide transportation alternatives (e.g., carpooling, carshare, cycling, walking)</item>
+      <item>Improve walking and cycling as transportation options</item>
+      <item>Lifespan of the existing transportation system</item>
+      <item>Health of residents</item>
+      <item>Air quality</item>
+      <item>Sense of community/improved community design</item>
+      <item>Traffic safety</item>
+      <item>Pedestrian safety</item>
+      <item>Bicycle safety</item>
+      <item>Missing trail connections</item>
+      <item>Goods movement (truck routes and Dangerous Goods Routes)</item>
+      <item>Other</item>
+    </questionitems>
+  </question>
+  <question>
+    <questionnumber>2</questionnumber>
+    <questiontext>What are the top three transportation improvements that you would like to see in Lloydminster? (Please enter up to three responses in order of importance - Maximum 250 Characters).</questiontext>
+  </question>
+  <question>
+    <questionnumber>3</questionnumber>
+    <questiontext>Please add any final concerns you have regarding Lloydminster's transportation system.</questiontext>
+  </question>
+  <question>
+    <questionnumber>4</questionnumber>
+    <questiontext>Please enter your postal code.</questiontext>
+  </question>
+</questions>

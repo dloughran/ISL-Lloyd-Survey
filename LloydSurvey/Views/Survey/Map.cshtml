@@ -1,0 +1,25 @@
+﻿@model LloydSurvey.Classes.MapModel
+@{
+    ViewBag.Title = "Map";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+
+<div id="dftMapHelp">
+    <h3>To indicate areas of concern...</h3>
+    <ol>
+        <li>From the pin selections (top-left), choose an issue-pin by touching or clicking it.</li>
+        <li>Place the pin on the map by touching or clicking at the desired location.</li>
+        <li>Enter your comments for the pin.</li>
+    </ol>
+    <p><strong>NOTE: </strong>Once you have added a pin to the map you may drag it to fine-tune it's location.</p>
+    <p>When you're finished adding pins, touch or click <strong>"Continue &gt;&gt;"</strong> at the bottom of the map.</p>
+    <p>Click or Touch to close these instructions. Click &quot;HELP&quot; to re-open.</p>
+</div>
+<form method="post" id="formMap">
+    @Html.HiddenFor(m => Model.Markers, new { @id="hidmapdata" })
+    @Html.HiddenFor(m => Model.RedirectTo, new { @id = "hidredirect" })
+</form>
+<div id="map-canvas"></div>
+<script type="text/javascript">
+    $mapModel = @Html.Raw(Json.Encode(Model));
+</script>
