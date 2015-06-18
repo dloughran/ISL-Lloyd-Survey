@@ -82,10 +82,6 @@ function initialize() {
 
     // create map instance
     $map = new google.maps.Map($mapDiv, mapOptions);
-    // add map overlay to enable pixel to latlng conversions (MAYBE DON'T NEED ANYMORE)
-    //$overlay = new google.maps.OverlayView();
-    //$overlay.draw = function () { };
-    //$overlay.setMap($map);
 
     // create custom control div for back button and call control constructor passing this new DIV
     var surveyNavPrevMapControlDiv = document.createElement('div');
@@ -105,7 +101,6 @@ function initialize() {
     pinShelfDiv.index = 1;
     $map.controls[google.maps.ControlPosition.TOP_LEFT].push(pinShelfDiv);
 
-
     // Get existing markers from MVC MapModel (if any)
     if ($mapModel != null & $mapModel != undefined & $mapModel.Markers != null & $mapModel.Markers != undefined) {
         var m = JSON.parse($mapModel.Markers);
@@ -118,8 +113,6 @@ function initialize() {
     google.maps.event.addListener($map, 'click', function (e) {
         placeMarker(e.latLng, $map);
     });
-
-
 }
 
 // Create Survey Previous and Next Navigation Controls to add to Google Map Controls Collection
@@ -138,9 +131,10 @@ function SurveyPrevNav(el, map) {
     surveyPreviousPageDiv.classList.add('dft-gm-lb-fix');
     el.appendChild(surveyPreviousPageDiv);
     google.maps.event.addDomListener(surveyPreviousPageDiv, 'click', function (e) {
-        serializeMarkers("One"); //Passing taget view so the MVC controller can redirect properly
+        serializeMarkers("One"); //Passing target view so the MVC controller can redirect properly
     });
 }
+
 function SurveyNextNav(el,map) {
     var isiPhone = navigator.userAgent.match(/iPhone/i);
     var surveyNextPageDiv = document.createElement('div');
@@ -157,13 +151,13 @@ function SurveyNextNav(el,map) {
     el.appendChild(surveyNextPageDiv);
 
     google.maps.event.addDomListener(surveyNextPageDiv, 'click', function (e) {
-        serializeMarkers("Two"); //Passing taget view so the MVC controller can redirect properly
+        serializeMarkers("Two"); //Passing target view so the MVC controller can redirect properly
     });
 }
 
+// Serialize all relevant marker information and put in form data field "hidmapdata"
+// submit the form
 function serializeMarkers(nextView) {
-    // Serialize all relevant marker information and put in form data field "hidmapdata"
-    // submit the form
     $slimMarkers = [];
     for (var i = 0; i < $markers.length; i++) {
         if ($markers[i] != null & $markers[i] != undefined) {
@@ -209,14 +203,6 @@ function PinShelf(shelfDiv, map) {
     pinDiv4.style.cssFloat = "left";
     pinDiv4.innerHTML = '<div>Walk/Cycle</div><div><img id="dftpin4" class="dft-pin-40" type="Walk/Cycle Connections" src="/Content/img/pedcyclepin_64.png"></div><div>Connections</div>';
     shelfDiv.appendChild(pinDiv4);
-
-    /*
-    var pinDiv5 = document.createElement('div');
-    pinDiv5.id = "pinDiv5";
-    pinDiv5.style.cssFloat = "left";
-    pinDiv5.innerHTML = '<div>Rail Grade</div><div><img id="dftpin5" class="dft-pin-40" type="Rail Grade Separation" src="/Content/img/railxingpin_64.png"></div><div>Separation</div>';
-    shelfDiv.appendChild(pinDiv5);
-    */
 
     var pinDiv5 = document.createElement('div');
     pinDiv5.id = "pinDiv5";
@@ -271,6 +257,7 @@ function PinShelf(shelfDiv, map) {
 
 }
 
+// When pin is clicked...
 function pinClicked(pin, pinDiv) {
     var pinId = '#dftpin' + pin;
     var pinDivId = '#' + pinDiv.id;
@@ -290,6 +277,7 @@ function pinClicked(pin, pinDiv) {
     hideMapHelp();
 }
 
+// Hide the map help 
 function hideMapHelp() {
     //alert("hideMapHelp");
     $('#dftMapHelp').hide('slow', function () {
@@ -298,6 +286,7 @@ function hideMapHelp() {
 
 }
 
+// Create a marker from the information derived from the session
 function createMarker(m) {
     var loc = new google.maps.LatLng(parseFloat(m.lat), parseFloat(m.lng));
     var newMarker = new google.maps.Marker({
@@ -319,6 +308,7 @@ function createMarker(m) {
     $markers.push(newMarker);
 }
 
+// Create a new map marker based on where the user click on the map surface
 function placeMarker(position, map) {
     //limit the number of markers placed to 50
     if ($markers.length < 50) {
@@ -352,6 +342,9 @@ function placeMarker(position, map) {
     }
 }
 
+// Create and show the info window for a marker
+// NOTE: isNew is always true and, as a result, this code 
+// could be refactored to eliminate the isNew parameter
 function showInfoWindow(mkr, isNew) {
     var infoWindow;
     // if the maker is new create it's content, otherwise use existing marker information
@@ -383,37 +376,6 @@ function showInfoWindow(mkr, isNew) {
         $(window.scrollTo(0, 0));
     });
 
-    // add infoWindow listener in order to manipulate marker infowindow
-    // markup once all dom elements are created.
-    /*
-    google.maps.event.addListener(infoWindow, 'domready', function (e) {
-        var iwOuter = $('.gm-style-iw');
-        var iwBackground = iwOuter.prev();
-        iwBackground.children(':nth-child(2)').css({ 'display': 'none' });
-        iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
-        // fix infoWindow positioning
-        iwOuter.parent().parent().css({ left: '20px' });
-        // fix the infoWindow pointer
-        iwBackground.children(':nth-child(1)').attr('style', function (i, s) { return s + 'left: 102px !important;' });
-        iwBackground.children(':nth-child(3)').attr('style', function (i, s) { return s + 'left: 102px !important;' });
-        iwBackground.children(':nth-child(3)').find('div').children().css({ 'box-shadow': 'none' });
-        // fix the infoWindow close button
-        var iwCloseBtn = iwOuter.next();
-        iwCloseBtn.css({
-            opacity: '1',
-            right: '55px',
-            top: '20px',
-            border: '1px solid #FFF',
-            'border-radius': '1px',
-            'box-shadow': '0 0 5px #333333'
-        });
-        iwCloseBtn.mouseout(function () {
-            $(this).css({ opacity: '1' });
-        });
-
-    });
-    */
-
     // store the updated infoWindow in the marker
     mkr.infoWin = infoWindow;
 
@@ -421,10 +383,7 @@ function showInfoWindow(mkr, isNew) {
     infoWindow.open(mkr.map, mkr);
 }
 
-function showExistingInfoWindow(mkr)
-{
-
-}
+// Generate a UUID for a marker
 function generateUUID() {
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -434,6 +393,8 @@ function generateUUID() {
     });
     return uuid;
 };
+
+// The following are Google Maps utility methods
 
 // Set the map property of all markers (shows them on the map)
 function showMarkers() {

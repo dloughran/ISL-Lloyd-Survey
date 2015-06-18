@@ -119,8 +119,6 @@
     <Compile Include="Classes\Question.cs" />
     <Compile Include="Classes\QuestionPageOneModel.cs" />
     <Compile Include="Classes\QuestionPageTwoModel.cs" />
-    <Compile Include="Classes\QuestionSet.cs" />
-    <Compile Include="Classes\QuestionTextEntry.cs" />
     <Compile Include="Classes\SlimMarker.cs" />
     <Compile Include="Classes\XMLHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
